@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🛡️ TIẾN SHIELD AI
+# 🛡️ CYBERSHIELD AI
 
 ### AI-Powered Phishing Link Analyzer
 
@@ -19,7 +19,7 @@
 
 ## 📋 Giới thiệu
 
-**Tiến Shield AI** là ứng dụng web giúp người dùng kiểm tra tính an toàn của bất kỳ đường link nào trước khi truy cập. Hệ thống kết hợp **5 module quét song song** và **AI NVIDIA GPT-120B** để đưa ra đánh giá toàn diện.
+**CyberShield AI** là ứng dụng web giúp người dùng kiểm tra tính an toàn của bất kỳ đường link nào trước khi truy cập. Hệ thống kết hợp **5 module quét song song** và **AI NVIDIA GPT-120B** để đưa ra đánh giá toàn diện.
 
 ### 🎯 Vấn đề giải quyết
 - Việt Nam có **hơn 15 triệu** nạn nhân lừa đảo qua mạng (BKAV 2024)
@@ -55,8 +55,8 @@
 
 ### Bước 1: Clone repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/tien-shield-ai.git
-cd tien-shield-ai
+git clone https://github.com/YOUR_USERNAME/cybershield-ai.git
+cd cybershield-ai
 ```
 
 ### Bước 2: Cài đặt thư viện
@@ -102,7 +102,7 @@ ngrok http 5000
 ## 📁 Cấu trúc dự án
 
 ```
-tien-shield-ai/
+cybershield-ai/
 ├── app.py                 # Flask server + 5 module quét
 ├── requirements.txt       # Thư viện Python
 ├── .env                   # API Key (không push lên Git)
@@ -124,7 +124,7 @@ tien-shield-ai/
 
 ## 👨‍💻 Tác giả
 
-**Nguyễn Xuân Tiến**
+**CyberShield AI Team**
 - 🎓 Sinh viên An toàn Thông tin
 - 💻 AI Developer
 - 📧 Email: [your_email@example.com]
@@ -141,6 +141,6 @@ Dự án này được phân phối dưới giấy phép [MIT License](LICENSE).
 
 **⭐ Nếu thấy hữu ích, hãy cho mình một Star nhé! ⭐**
 
-Made with ❤️ by Nguyễn Xuân Tiến
+Made with ❤️ by CyberShield AI Team
 
 </div>

@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         // Bắt đầu in log terminal mô phỏng (5 MODULE QUÉT)
         const logs = [
-            { text: "> [SYS] Khởi động Tiến Shield AI Engine v2.0...", delay: 200, type: "info" },
+            { text: "> [SYS] Khởi động CyberShield AI Engine v2.0...", delay: 200, type: "info" },
             { text: `> [SYS] Nạp mục tiêu: ${url}`, delay: 400, type: "info" },
             { text: "> ─────────────────────────────────────────────────", delay: 600, type: "info" },
             { text: "> [MODULE 1/5] HEURISTIC SCANNER", delay: 800, type: "success" },

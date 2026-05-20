@@ -378,7 +378,7 @@ def check_security_headers(url):
             url = "https://" + url
 
         resp = requests.get(url, timeout=8, allow_redirects=True, verify=False,
-                           headers={"User-Agent": "TienShieldAI/1.0 SecurityAuditor"})
+                           headers={"User-Agent": "CyberShield AI/1.0 SecurityAuditor"})
 
         result["available"] = True
         headers = resp.headers
@@ -491,8 +491,8 @@ def get_ai_link_analysis(url, heuristic_data, whois_data, ssl_data, header_data)
         header_text = "\n".join(header_lines)
 
     system_prompt = (
-        "Bạn là 'Tiến AI Threat Intel' - Chuyên gia phân tích bảo mật cấp cao hàng đầu Việt Nam, "
-        "được phát triển bởi lập trình viên Nguyễn Xuân Tiến.\n\n"
+        "Bạn là 'CyberShield AI Threat Intel' - Chuyên gia phân tích bảo mật cấp cao hàng đầu Việt Nam, "
+        "được phát triển bởi lập trình viên CyberShield AI Team.\n\n"
         "Nhiệm vụ: Tổng hợp toàn bộ dữ liệu từ 4 module quét (Heuristic, WHOIS, SSL, HTTP Headers) "
         "để đưa ra báo cáo phân tích bảo mật toàn diện nhất.\n\n"
         "QUY TẮC ĐỊNH DẠNG BÁO CÁO (BẮT BUỘC TUÂN THỦ):\n"
@@ -515,7 +515,7 @@ def get_ai_link_analysis(url, heuristic_data, whois_data, ssl_data, header_data)
         "- Nếu link nguy hiểm: [VERDICT: DANGEROUS]\n\n"
         "LƯU Ý QUAN TRỌNG: Các tên miền thuộc thương hiệu uy tín toàn cầu (google.com, youtube.com, facebook.com, "
         "shopee.vn, fpt.edu.vn, v.v.) nếu KHÔNG có dấu hiệu giả mạo thì PHẢI đánh giá là AN TOÀN [VERDICT: SAFE].\n\n"
-        "Kết thúc bằng dòng: *Được bảo mật bởi hệ thống AI của Nguyễn Xuân Tiến*\n"
+        "Kết thúc bằng dòng: *Được bảo mật bởi hệ thống AI của CyberShield AI Team*\n"
         "Rồi xuống dòng và ghi tag VERDICT."
     )
 
