@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Phishing Link Analyzer - By Nguyễn Xuân Tiến</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Highlight.js for Code Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="stars-bg"></div>
+    <div class="glowing-bg-circle orange"></div>
+    <div class="glowing-bg-circle cyan"></div>
+
+    <div class="app-container">
+        <!-- Sidebar: Lịch sử quét -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-shield-halved logo-icon"></i>
+                <div class="brand-info">
+                    <h2>TIẾN SHIELD AI</h2>
+                    <span class="status-indicator"><span class="dot pulse"></span>ONLINE</span>
+                </div>
+            </div>
+            
+            <div class="history-section">
+                <h3><i class="fa-solid fa-clock-rotate-left"></i> LỊCH SỬ QUÉT</h3>
+                <div class="history-list" id="historyList">
+                    <!-- Sẽ được điền động bằng JS từ LocalStorage -->
+                    <div class="empty-history">Chưa quét link nào</div>
+                </div>
+            </div>
+            
+            <div class="sidebar-footer">
+                <p>Tác giả: <strong>Nguyễn Xuân Tiến</strong></p>
+                <span class="version">V1.0 - AI Integrated</span>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="main-header">
+                <div class="title-area">
+                    <h1>AI PHISHING LINK ANALYZER</h1>
+                    <p class="subtitle">ĐỘNG CƠ ĐÁNH GIÁ VÀ CHẨN ĐOÁN LINK ĐỘC HẠI BẰNG TRÍ TUỆ NHÂN TẠO NVIDIA 120B</p>
+                </div>
+                <div class="credits">
+                    <span class="tag neon-cyan">Threat Intel</span>
+                    <span class="tag neon-orange">Cybersecurity</span>
+                </div>
+            </header>
+
+            <div class="content-body">
+                <!-- Section 1: Nhập link phân tích -->
+                <section class="card input-card" id="inputCard">
+                    <div class="card-glow"></div>
+                    <div class="card-header-glow">
+                        <i class="fa-solid fa-magnifying-glass-chart"></i> NHẬP ĐƯỜNG DẪN CẦN PHÂN TÍCH
+                    </div>
+                    <p class="card-desc">Hệ thống sẽ tự động phân tích cấu trúc URL, quét tĩnh giả mạo tên miền (Typo-squatting) và kích hoạt mô hình AI của Nguyễn Xuân Tiến để giải mã ý đồ lừa đảo.</p>
+                    
+                    <form id="analyzeForm" class="analyze-form">
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-link input-link-icon"></i>
+                            <input type="text" id="targetUrl" placeholder="Ví dụ: sh0pee-quatang.com, facebook.com..." required autocomplete="off">
+                            <button type="submit" id="submitBtn">
+                                <span>PHÂN TÍCH</span>
+                                <i class="fa-solid fa-bolt"></i>
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <div class="quick-examples">
+                        <span class="label">Mẫu test thử:</span>
+                        <button class="example-btn safe" data-url="google.com">Google (An toàn)</button>
+                        <button class="example-btn dangerous" data-url="sh0peee-quatang.vn">Shopee Fake (Nguy hại)</button>
+                        <button class="example-btn suspicious" data-url="103.252.12.1">Địa chỉ IP (Nghi ngờ)</button>
+                    </div>
+                </section>
+
+                <!-- Section 2: Loading & Scanning Animation -->
+                <section class="card loading-card hidden" id="loadingCard">
+                    <div class="radar-container">
+                        <div class="radar">
+                            <div class="radar-sweep"></div>
+                            <div class="radar-circle c1"></div>
+                            <div class="radar-circle c2"></div>
+                            <div class="radar-circle c3"></div>
+                            <div class="radar-crosshair h"></div>
+                            <div class="radar-crosshair v"></div>
+                        </div>
+                        <div class="scanning-status">ĐANG QUÉT MỤC TIÊU...</div>
+                    </div>
+                    
+                    <div class="terminal-log">
+                        <div class="terminal-header">
+                            <span class="term-dot red"></span>
+                            <span class="term-dot yellow"></span>
+                            <span class="term-dot green"></span>
+                            <span class="term-title">tiên_shield_engine_console.sh</span>
+                        </div>
+                        <div class="terminal-body" id="terminalLogs">
+                            <div class="log-row info">&gt; [i] Khởi tạo động cơ phân tích Tiến Shield AI...</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 3: Kết quả phân tích -->
+                <section class="results-layout hidden" id="resultsArea">
+                    <!-- Tóm tắt trạng thái và điểm số -->
+                    <div class="card status-card" id="statusCard">
+                        <div class="card-glow"></div>
+                        <div class="status-summary-flex">
+                            <div class="gauge-container">
+                                <svg class="gauge" viewBox="0 0 100 100">
+                                    <circle class="gauge-bg" cx="50" cy="50" r="40"></circle>
+                                    <circle class="gauge-fill" id="riskGauge" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="251.2"></circle>
+                                </svg>
+                                <div class="gauge-value">
+                                    <span id="riskScore">0</span>
+                                    <span class="pct">%</span>
+                                    <span class="label">RỦI RO</span>
+                                </div>
+                            </div>
+                            
+                            <div class="status-info">
+                                <div class="status-header-tag">KẾT LUẬN CUỐI CÙNG</div>
+                                <div class="status-label" id="statusLabel">AN TOÀN</div>
+                                <p class="status-desc" id="statusDesc">Đường link chưa có dấu hiệu lừa đảo rõ ràng. Hãy tiếp tục cảnh giác.</p>
+                                <div class="url-display" id="urlDisplay">facebook.com</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quét tĩnh cảnh báo (Heuristics) -->
+                    <div class="card warnings-card" id="warningsCard">
+                        <div class="card-glow"></div>
+                        <div class="card-header-glow">
+                            <i class="fa-solid fa-triangle-exclamation"></i> KẾT QUẢ QUÉT TĨNH (HEURISTICS)
+                        </div>
+                        <div class="warnings-list" id="warningsList">
+                            <!-- Chèn bằng JS -->
+                        </div>
+                    </div>
+
+                    <!-- AI Deep Report (Báo cáo AI chuyên sâu) -->
+                    <div class="card ai-report-card">
+                        <div class="card-glow"></div>
+                        <div class="card-header-glow">
+                            <i class="fa-solid fa-brain"></i> BÁO CÁO PHÂN TÍCH CHUYÊN SÂU BẰNG TRÍ TUỆ NHÂN TẠO NVIDIA
+                        </div>
+                        <div class="ai-report-content" id="aiReportContent">
+                            <!-- Render bằng Markdown JS -->
+                        </div>
+                        <div class="ai-report-footer">
+                            <div class="signature">
+                                <i class="fa-solid fa-shield-halved glow-icon"></i>
+                                <span>Bảo mật bởi hệ thống AI của <strong>Nguyễn Xuân Tiến</strong></span>
+                            </div>
+                            <button class="btn btn-secondary" id="copyReportBtn">
+                                <i class="fa-solid fa-copy"></i> Copy Báo Cáo
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Nút làm lại -->
+                    <div class="action-bar">
+                        <button class="btn btn-primary btn-large" id="resetBtn">
+                            <i class="fa-solid fa-arrow-rotate-left"></i> PHÂN TÍCH ĐƯỜNG LINK KHÁC
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Thư viện CDN cần thiết -->
+    <!-- Marked.js for Markdown Rendering -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+    <!-- Highlight.js for Code Formatting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    
+    <!-- Custom App JS -->
+    <script src="/static/app.js"></script>
+</body>
+</html>
