@@ -126,7 +126,7 @@ cybershield-ai/
 **CyberShield AI Team**
 - 🎓 Sinh viên An toàn Thông tin
 - 💻 AI Developer
-- 📧 Email: [your_email@example.com]
+- 📧 Email: tiennguyen2306azz@gmail.com
 
 ---
 
