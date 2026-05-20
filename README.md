@@ -51,7 +51,6 @@
 
 ### Yêu cầu
 - Python 3.9+
-- NVIDIA AI API Key (miễn phí tại [build.nvidia.com](https://build.nvidia.com))
 
 ### Bước 1: Clone repository
 ```bash
