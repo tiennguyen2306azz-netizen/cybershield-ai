@@ -1,5 +1,5 @@
 @echo off
-title TIEN SHIELD AI RUNNER
+title CYBERSHIELD AI RUNNER
 color 0b
 
 echo =========================================================================
@@ -8,7 +8,7 @@ echo ^|___    ___^|___     ___^|    \ ^|   ^|/   ______^|   ^|   ^|___    ___^| 
 echo     ^|    ^|       ^|    ^|   ^| \ \^|   ^|   ^|  ___ ^|   ^|   ^|   ^|    ^|   ^| \ \^|   ^|
 echo     ^|    ^|       ^|    ^|   ^|  \    ^|   ^| ^|_  ^|^|   ^|   ^|   ^|    ^|   ^|  \    ^|
 echo     ^|____^|   ____^|____^|___^|   \___^|\_________^|_______^|   ^|____^|   ^|___^|   \___^|
-echo                               BY NGUYEN XUAN TIEN
+echo                               BY CYBERSHIELD AI TEAM
 echo =========================================================================
 echo.
 echo [i] Dang kiem tra moi truong Python...
@@ -42,7 +42,7 @@ if errorlevel 1 (
 
 echo.
 echo =========================================================================
-echo [+] KHOI DONG THANH CONG TIEN SHIELD AI LINK ANALYZER SERVER!
+echo [+] KHOI DONG THANH CONG CYBERSHIELD AI LINK ANALYZER SERVER!
 echo [+] Dia chi truy cap: http://localhost:5000/
 echo =========================================================================
 echo.

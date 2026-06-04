@@ -3,7 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CyberShield AI - Phishing Link Analyzer</title>
+    <title>CyberShield Agent - Phishing Link Analyzer</title>
+    <link rel="icon" type="image/png" href="/static/logo.png">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="CyberShield Agent - Động cơ phân tích và chẩn đoán liên kết lừa đảo (phishing) chuyên sâu bằng Trí tuệ Nhân tạo AI NVIDIA 120B và 7 mô hình quét kỹ thuật.">
+    <meta name="keywords" content="cybershield agent, cybershield ai, check link phishing, phat hien lua dao, kiem tra url, quat link doc, an toan thong tin, tien nguyen security">
+    <meta name="author" content="CyberShield Agent Team">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook / Zalo (Hiển thị bản xem trước link cực đẹp khi chia sẻ) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cybershieldagent.vercel.app/">
+    <meta property="og:title" content="CyberShield Agent - AI Phishing Link Analyzer">
+    <meta property="og:description" content="Động cơ quét liên kết độc hại, phát hiện lừa đảo bằng Trí tuệ Nhân tạo AI và 7 module quét chuyên nghiệp.">
+    <meta property="og:image" content="https://cybershieldagent.vercel.app/static/logo.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://cybershieldagent.vercel.app/">
+    <meta property="twitter:title" content="CyberShield Agent - AI Phishing Link Analyzer">
+    <meta property="twitter:description" content="Động cơ quét liên kết độc hại, phát hiện lừa đảo bằng Trí tuệ Nhân tạo AI và 7 module quét chuyên nghiệp.">
+    <meta property="twitter:image" content="https://cybershieldagent.vercel.app/static/logo.png">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,25 +39,151 @@
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/static/style.css">
+    
+    <style>
+        /* Tab Header */
+        .terminal-tab-header {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+        }
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            padding: 8px 16px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 8px rgba(0, 243, 255, 0.2);
+        }
+        .tab-btn.active {
+            background: rgba(0, 243, 255, 0.15);
+            color: var(--neon-cyan);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 12px rgba(0, 243, 255, 0.3);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Diagnostics Panel */
+        .diagnostic-panel {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            padding: 15px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 13px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .diagnostic-panel.code-style {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            background: rgba(0, 0, 0, 0.4);
+            border-color: rgba(0, 243, 255, 0.1);
+            max-height: 250px;
+            overflow-y: auto;
+        }
+        .diagnostic-item {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 8px 0;
+        }
+        .diagnostic-item:last-child {
+            border-bottom: none;
+        }
+        .diagnostic-label {
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .diagnostic-value {
+            color: var(--neon-cyan);
+            font-weight: 600;
+            text-align: right;
+            word-break: break-all;
+            padding-left: 10px;
+        }
+        .diagnostic-value.red-alert {
+            color: var(--neon-red);
+            text-shadow: 0 0 5px rgba(255, 0, 85, 0.3);
+        }
+        .diagnostic-value.green-ok {
+            color: var(--neon-green);
+        }
+    </style>
 </head>
 <body>
     <div class="stars-bg"></div>
     <div class="glowing-bg-circle orange"></div>
     <div class="glowing-bg-circle cyan"></div>
 
+    <!-- Mobile Top Bar: Chỉ hiển thị trên điện thoại/máy tính bảng -->
+    <header class="mobile-top-bar">
+        <div class="mobile-brand">
+            <img src="/static/logo.png" alt="CyberShield Agent Logo" class="mobile-logo-img">
+            <span class="mobile-brand-title">CYBERSHIELD AGENT</span>
+        </div>
+        <button id="mobileMenuBtn" class="mobile-toggle-btn">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>LỊCH SỬ</span>
+        </button>
+    </header>
+
+    <!-- Lớp phủ nền mờ khi mở Sidebar trên điện thoại -->
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
     <div class="app-container">
         <!-- Sidebar: Lịch sử quét -->
-        <aside class="sidebar">
+        <aside class="sidebar" id="appSidebar">
+            <!-- Nút đóng Sidebar chỉ hiển thị trên di động -->
+            <button class="close-sidebar-btn" id="closeSidebarBtn" aria-label="Đóng lịch sử quét">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
             <div class="sidebar-header">
-                <i class="fa-solid fa-shield-halved logo-icon"></i>
-                <div class="brand-info">
-                    <h2>CYBERSHIELD AI</h2>
+                <img src="/static/logo.png" alt="CyberShield Agent Logo" class="logo-img" style="width: 32px; height: 32px; border-radius: 6px; box-shadow: 0 0 8px var(--neon-cyan);">
+                <div class="brand-info" style="margin-left: 10px;">
+                    <h2>CYBERSHIELD AGENT</h2>
                     <span class="status-indicator"><span class="dot pulse"></span>ONLINE</span>
                 </div>
             </div>
             
             <div class="history-section">
-                <h3><i class="fa-solid fa-clock-rotate-left"></i> LỊCH SỬ QUÉT</h3>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                    <h3 style="margin:0;"><i class="fa-solid fa-clock-rotate-left"></i> LỊCH SỬ QUÉT</h3>
+                    <button id="clearHistoryBtn" style="background:transparent; border:none; color:rgba(255,255,255,0.4); font-size:10px; cursor:pointer; font-family:'Orbitron', sans-serif; letter-spacing:1px; display:flex; align-items:center; gap:4px; padding:2px 6px; border-radius:3px; transition:all 0.3s ease;" onmouseover="this.style.color='var(--neon-red)';" onmouseout="this.style.color='rgba(255,255,255,0.4)';">
+                        <i class="fa-solid fa-trash-can"></i> XÓA HẾT
+                    </button>
+                </div>
                 <div class="history-list" id="historyList">
                     <!-- Sẽ được điền động bằng JS từ LocalStorage -->
                     <div class="empty-history">Chưa quét link nào</div>
@@ -44,7 +191,7 @@
             </div>
             
             <div class="sidebar-footer">
-                <p>Developed by <strong>CyberShield AI Team</strong></p>
+                <p>Developed by <strong>CyberShield Agent Team</strong></p>
                 <span class="version">V1.0 - AI Integrated</span>
             </div>
         </aside>
@@ -53,7 +200,7 @@
         <main class="main-content">
             <header class="main-header">
                 <div class="title-area">
-                    <h1>CYBERSHIELD AI</h1>
+                    <h1>CYBERSHIELD AGENT</h1>
                     <p class="subtitle">ĐỘNG CƠ ĐÁNH GIÁ VÀ CHẨN ĐOÁN LINK ĐỘC HẠI BẰNG TRÍ TUỆ NHÂN TẠO NVIDIA 120B</p>
                 </div>
                 <div class="credits">
@@ -144,34 +291,121 @@
                         </div>
                     </div>
 
-                    <!-- Quét tĩnh cảnh báo (Heuristics) -->
-                    <div class="card warnings-card" id="warningsCard">
+                    <!-- Diagnostics Terminal (Hệ thống Tab tương tác) -->
+                    <div class="card diagnostics-terminal-card" style="margin-top: 20px;">
                         <div class="card-glow"></div>
-                        <div class="card-header-glow">
-                            <i class="fa-solid fa-triangle-exclamation"></i> KẾT QUẢ QUÉT TĨNH (HEURISTICS)
-                        </div>
-                        <div class="warnings-list" id="warningsList">
-                            <!-- Chèn bằng JS -->
-                        </div>
-                    </div>
-
-                    <!-- AI Deep Report (Báo cáo AI chuyên sâu) -->
-                    <div class="card ai-report-card">
-                        <div class="card-glow"></div>
-                        <div class="card-header-glow">
-                            <i class="fa-solid fa-brain"></i> BÁO CÁO PHÂN TÍCH CHUYÊN SÂU BẰNG TRÍ TUỆ NHÂN TẠO NVIDIA
-                        </div>
-                        <div class="ai-report-content" id="aiReportContent">
-                            <!-- Render bằng Markdown JS -->
-                        </div>
-                        <div class="ai-report-footer">
-                            <div class="signature">
-                                <i class="fa-solid fa-shield-halved glow-icon"></i>
-                                <span>Bảo mật bởi <strong>CyberShield AI</strong></span>
-                            </div>
-                            <button class="btn btn-secondary" id="copyReportBtn">
-                                <i class="fa-solid fa-copy"></i> Copy Báo Cáo
+                        <div class="terminal-tab-header">
+                            <button class="tab-btn active" data-tab="ai-report">
+                                <i class="fa-solid fa-brain"></i> AI REPORT
                             </button>
+                            <button class="tab-btn" data-tab="heuristics">
+                                <i class="fa-solid fa-triangle-exclamation"></i> HEURISTICS
+                            </button>
+                            <button class="tab-btn" data-tab="html-audit">
+                                <i class="fa-solid fa-code"></i> HTML & DEOBFUSCATOR
+                            </button>
+                            <button class="tab-btn" data-tab="whois-dns">
+                                <i class="fa-solid fa-globe"></i> WHOIS & DNS
+                            </button>
+                            <button class="tab-btn" data-tab="ssl-cert">
+                                <i class="fa-solid fa-lock"></i> SSL CERT
+                            </button>
+                            <button class="tab-btn" data-tab="http-headers">
+                                <i class="fa-solid fa-network-wired"></i> HEADERS
+                            </button>
+                        </div>
+                        
+                        <div class="terminal-tab-body">
+                            <!-- Tab 1: AI Report -->
+                            <div class="tab-content active" id="tab-ai-report">
+                                <div class="ai-report-content" id="aiReportContent">
+                                    <!-- Render bằng Markdown JS -->
+                                </div>
+                                <div class="ai-report-footer" style="margin-top: 20px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 15px;">
+                                    <div class="signature">
+                                        <i class="fa-solid fa-shield-halved glow-icon"></i>
+                                        <span>Bảo mật bởi <strong>CyberShield Agent</strong></span>
+                                    </div>
+                                    <button class="btn btn-secondary" id="copyReportBtn">
+                                        <i class="fa-solid fa-copy"></i> Copy Báo Cáo
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Tab 2: Heuristics -->
+                            <div class="tab-content" id="tab-heuristics">
+                                <div class="warnings-list" id="warningsList">
+                                    <!-- Chèn bằng JS -->
+                                </div>
+                            </div>
+                            
+                            <!-- Tab 3: HTML & Deobfuscator -->
+                            <div class="tab-content" id="tab-html-audit">
+                                <div class="diagnostics-sub-layout">
+                                    <div class="diagnostic-block">
+                                        <h4 style="font-family: 'Orbitron', sans-serif; color: var(--neon-cyan); margin-bottom: 12px; font-size: 13px; letter-spacing: 1px;">🧬 PHÁT HIỆN ĐẠO NHÁI GIAO DIỆN (HTML AUDIT)</h4>
+                                        <div id="htmlAuditDetails" class="diagnostic-panel">
+                                            <!-- Điền bằng JS -->
+                                        </div>
+                                    </div>
+                                    <div class="diagnostic-block" style="margin-top: 20px;">
+                                        <h4 style="font-family: 'Orbitron', sans-serif; color: var(--neon-red); margin-bottom: 12px; font-size: 13px; letter-spacing: 1px;">🚨 GIẢI MÃ THAM SỐ THEO DÕI (DEOBFUSCATOR)</h4>
+                                        <div id="deobfuscatorDetails" class="diagnostic-panel">
+                                            <!-- Điền bằng JS -->
+                                        </div>
+                                    </div>
+                                    <div class="diagnostic-block" style="margin-top: 20px;">
+                                        <h4 style="font-family: 'Orbitron', sans-serif; color: var(--neon-orange); margin-bottom: 12px; font-size: 13px; letter-spacing: 1px;">⚙️ PHÂN TÍCH HÀNH VI JAVASCRIPT (JS AUDIT)</h4>
+                                        <div id="jsAuditDetails" class="diagnostic-panel">
+                                            <!-- Điền bằng JS -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Tab 4: WHOIS & DNS -->
+                            <div class="tab-content" id="tab-whois-dns">
+                                <div class="diagnostics-sub-layout">
+                                    <div class="diagnostic-block">
+                                        <h4 style="font-family: 'Orbitron', sans-serif; color: var(--neon-cyan); margin-bottom: 12px; font-size: 13px; letter-spacing: 1px;">🌐 THÔNG TIN TÊN MIỀN (WHOIS)</h4>
+                                        <div id="whoisDetails" class="diagnostic-panel">
+                                            <!-- Điền bằng JS -->
+                                        </div>
+                                    </div>
+                                    <div class="diagnostic-block" style="margin-top: 20px;">
+                                        <h4 style="font-family: 'Orbitron', sans-serif; color: var(--neon-cyan); margin-bottom: 12px; font-size: 13px; letter-spacing: 1px;">📬 CẤU HÌNH MAIL SERVER (DNS MX RECORDS)</h4>
+                                        <div id="dnsDetails" class="diagnostic-panel">
+                                            <!-- Điền bằng JS -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Tab 5: SSL Cert -->
+                            <div class="tab-content" id="tab-ssl-cert">
+                                <div class="diagnostic-block">
+                                    <h4 style="font-family: 'Orbitron', sans-serif; color: var(--neon-cyan); margin-bottom: 12px; font-size: 13px; letter-spacing: 1px;">🔒 CHỨNG CHỈ MÃ HÓA SSL/TLS</h4>
+                                    <div id="sslDetails" class="diagnostic-panel">
+                                        <!-- Điền bằng JS -->
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Tab 6: HTTP Headers -->
+                            <div class="tab-content" id="tab-http-headers">
+                                <div class="diagnostic-block">
+                                    <h4 style="font-family: 'Orbitron', sans-serif; color: var(--neon-cyan); margin-bottom: 12px; font-size: 13px; letter-spacing: 1px;">📋 HTTP SECURITY HEADERS AUDIT</h4>
+                                    <div id="headersDetails" class="diagnostic-panel">
+                                        <!-- Điền bằng JS -->
+                                    </div>
+                                </div>
+                                <div class="diagnostic-block" style="margin-top: 20px;">
+                                    <h4 style="font-family: 'Orbitron', sans-serif; color: var(--neon-cyan); margin-bottom: 12px; font-size: 13px; letter-spacing: 1px;">🔗 SƠ ĐỒ CHUỖI CHUYỂN HƯỚNG (REDIRECTION CHAIN MAP)</h4>
+                                    <div id="redirectChainMap" class="diagnostic-panel" style="padding: 20px; overflow-x: auto;">
+                                        <!-- Điền bằng JS -->
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
